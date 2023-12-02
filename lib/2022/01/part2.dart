@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  final File file = File('lib/src/2022/01/input.txt');
+  final File file = File('lib/2022/01/input.txt');
   final caloriesElves = <int>[];
   int caloriesCount = 0;
 

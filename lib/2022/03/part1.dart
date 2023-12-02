@@ -2,31 +2,22 @@ import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  final File file = File('lib/src/2022/03/input.txt');
+  final File file = File('lib/2022/03/input.txt');
   int prioritiesSum = 0;
-  int eventsCount = 0;
-  List<String> events = [];
 
   file.openRead().transform(utf8.decoder).transform(LineSplitter()).listen(
-    (event) {
-      eventsCount++;
-      events.add(event);
-
-      if (eventsCount % 3 == 0) {
-        prioritiesSum += calculateItemPriority(getBadge(events));
-        eventsCount = 0;
-        events = [];
-      }
-    },
-    onDone: () => print(prioritiesSum),
-  );
+        (event) => prioritiesSum += calculateItemPriority(getMixedItem(event)),
+        onDone: () => print(prioritiesSum),
+      );
 }
 
-String? getBadge(List<String> events) {
-  for (int i = 0; i <= events[0].length; i++) {
-    String char = events[0][i];
+String? getMixedItem(s) {
+  List<String> compartments = splitByHalf(s);
 
-    if (events[1].contains(char) && events[2].contains(char)) return char;
+  for (int i = 0; i <= compartments[0].length; i++) {
+    String char = compartments[0][i];
+
+    if (compartments[1].contains(char)) return char;
   }
 
   throw ArgumentError('No matching items.');

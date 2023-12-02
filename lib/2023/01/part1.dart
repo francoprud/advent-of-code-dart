@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  final File file = File('lib/src/2023/01/input.txt');
+  final File file = File('lib/2023/01/input.txt');
   int coordinatesSum = 0;
 
   file.openRead().transform(utf8.decoder).transform(LineSplitter()).listen(
