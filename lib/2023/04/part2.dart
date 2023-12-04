@@ -4,12 +4,31 @@ import 'dart:math';
 
 void main() {
   final File file = File('lib/2023/04/input.txt');
-  int totalPoints = 0;
+  Map<int, int> amountPerScratchcard = {};
+  int totalScratchcards = 0;
 
   file.openRead().transform(utf8.decoder).transform(LineSplitter()).listen(
-        (event) => totalPoints += Scratchcard.parse(event).points(),
-        onDone: () => print(totalPoints),
-      );
+    (event) {
+      final Scratchcard scratchcard = Scratchcard.parse(event);
+
+      amountPerScratchcard.update(scratchcard.id, (value) => value + 1,
+          ifAbsent: () => 1);
+
+      for (int times = 0;
+          times < amountPerScratchcard[scratchcard.id]!;
+          times++) {
+        for (int i = scratchcard.id + 1;
+            i < scratchcard.id + 1 + scratchcard.matchingNumbers();
+            i++) {
+          amountPerScratchcard.update(i, (value) => value + 1,
+              ifAbsent: () => 1);
+        }
+      }
+
+      totalScratchcards += amountPerScratchcard[scratchcard.id]!;
+    },
+    onDone: () => print(totalScratchcards),
+  );
 }
 
 class Scratchcard {
