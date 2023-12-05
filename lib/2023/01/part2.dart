@@ -23,8 +23,7 @@ String getNumbersFromString(String s) {
     'eight': '8',
     'nine': '9',
   };
-  final RegExp regExp = RegExp(
-      '(?=(1|2|3|4|5|6|7|8|9|one|two|three|four|five|six|seven|eight|nine))');
+  final RegExp regExp = RegExp('(?=(1|2|3|4|5|6|7|8|9|one|two|three|four|five|six|seven|eight|nine))');
 
   return regExp.allMatches(s).map((match) {
     final String? number = match[1];

@@ -56,8 +56,7 @@ class Scratchcard {
   }
 
   static List<int> getWinningNumbers(String cardData) {
-    return extractNumbers(
-        cardData.substring(cardData.indexOf(':') + 1).split('|')[0]);
+    return extractNumbers(cardData.substring(cardData.indexOf(':') + 1).split('|')[0]);
   }
 
   static List<int> getPlayedNumbers(String cardData) {

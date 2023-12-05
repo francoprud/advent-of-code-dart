@@ -39,7 +39,5 @@ int getColorFromGameRecord(String s, String color) {
 }
 
 int getColorsPowerSum(List<int> gameConfiguration) {
-  return gameConfiguration
-      .getRange(1, 4)
-      .reduce((value, element) => value * element);
+  return gameConfiguration.getRange(1, 4).reduce((value, element) => value * element);
 }

@@ -11,17 +11,11 @@ void main() {
     (event) {
       final Scratchcard scratchcard = Scratchcard.parse(event);
 
-      amountPerScratchcard.update(scratchcard.id, (value) => value + 1,
-          ifAbsent: () => 1);
+      amountPerScratchcard.update(scratchcard.id, (value) => value + 1, ifAbsent: () => 1);
 
-      for (int times = 0;
-          times < amountPerScratchcard[scratchcard.id]!;
-          times++) {
-        for (int i = scratchcard.id + 1;
-            i < scratchcard.id + 1 + scratchcard.matchingNumbers();
-            i++) {
-          amountPerScratchcard.update(i, (value) => value + 1,
-              ifAbsent: () => 1);
+      for (int times = 0; times < amountPerScratchcard[scratchcard.id]!; times++) {
+        for (int i = scratchcard.id + 1; i < scratchcard.id + 1 + scratchcard.matchingNumbers(); i++) {
+          amountPerScratchcard.update(i, (value) => value + 1, ifAbsent: () => 1);
         }
       }
 
@@ -75,8 +69,7 @@ class Scratchcard {
   }
 
   static List<int> getWinningNumbers(String cardData) {
-    return extractNumbers(
-        cardData.substring(cardData.indexOf(':') + 1).split('|')[0]);
+    return extractNumbers(cardData.substring(cardData.indexOf(':') + 1).split('|')[0]);
   }
 
   static List<int> getPlayedNumbers(String cardData) {

@@ -32,8 +32,7 @@ List<int> findAdjacentNumbers(List<List<String>> matrix, int i, int j) {
 
   for (int row = i - 1; row <= i + 1; row++) {
     for (int column = j - 1; column <= j + 1; column++) {
-      (int, Point)? numberWithCoordinate =
-          findNumberFromCoordinate(matrix, row, column);
+      (int, Point)? numberWithCoordinate = findNumberFromCoordinate(matrix, row, column);
 
       if (numberWithCoordinate != null) {
         if (!uniqueCoordinates.contains(numberWithCoordinate.$2)) {
@@ -47,8 +46,7 @@ List<int> findAdjacentNumbers(List<List<String>> matrix, int i, int j) {
   return numbers;
 }
 
-(int, Point)? findNumberFromCoordinate(
-    List<List<String>> matrix, int i, int j) {
+(int, Point)? findNumberFromCoordinate(List<List<String>> matrix, int i, int j) {
   if (!belongsToMatrix(matrix, i, j)) return null;
   if (!isInt(matrix[i][j])) return null;
 
