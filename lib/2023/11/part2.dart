@@ -2,9 +2,11 @@ import 'dart:io';
 import 'dart:math';
 
 void main() {
-  Universe universe = Universe.build('lib/2023/11/example.txt');
+  Universe universe = Universe.build('lib/2023/11/input.txt');
+  universe.show();
   universe.expand();
-  print(universe.getTotalDistances());
+  universe.show();
+  // print(universe.getTotalDistances());
 }
 
 class Universe {
@@ -40,17 +42,22 @@ class Universe {
   }
 
   void expand() {
-    List<int> rowsWithoutGalaxies =
-        _getNotIncludedNumbers(map.length, _rowsWithGalaxies);
-    List<int> columnsWithoutGalaxies =
-        _getNotIncludedNumbers(map[0].length, _columnsWithGalaxies);
-
-    for (int i = 0; i < galaxies.length; i++) {
-      Point galaxy = galaxies[i];
-      galaxies[i] = Point(
-          _getCoordinateAfterExpansion(rowsWithoutGalaxies, galaxy.x),
-          _getCoordinateAfterExpansion(columnsWithoutGalaxies, galaxy.y));
-    }
+    // expand rows
+    int timesExpanded = 0;
+    _getNotIncludedNumbers(map.length, _rowsWithGalaxies).forEach((element) {
+      map.insert(element + timesExpanded++,
+          new List<String>.generate(map[0].length, (i) => '.').toList());
+    });
+    // expand columns
+    timesExpanded = 0;
+    _getNotIncludedNumbers(map[0].length, _columnsWithGalaxies).forEach((element) {
+      for (int i = 0; i < map.length; i++) {
+        map[i].insert(element + timesExpanded, '.');
+      }
+      timesExpanded++;
+    });
+    // update galaxies positions
+    _getGalaxies();
   }
 
   int getTotalDistances() {
@@ -63,12 +70,6 @@ class Universe {
     }
 
     return totalDistance;
-  }
-
-  int _getCoordinateAfterExpansion(List<int> list, num position) {
-    int count = list.where((element) => element < position).length;
-
-    return count + position as int;
   }
 
   int _getDistanceBetweenGalaxies(Point g1, Point g2) {
