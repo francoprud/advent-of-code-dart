@@ -2,6 +2,7 @@ import 'dart:io';
 
 void main() {
   final locationsLists = parseLocationsLists();
+
   print(calculateListsDistance(
     left: locationsLists.left,
     right: locationsLists.right,

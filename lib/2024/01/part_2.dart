@@ -5,8 +5,8 @@ void main() {
   final ({List<int> left, List<int> right}) locationsLists =
       parseLocationsLists();
 
-  print(
-      calculateListsSimilarityScore(locationsLists.left, locationsLists.right));
+  print(calculateListsSimilarityScore(
+      left: locationsLists.left, right: locationsLists.right));
 }
 
 ({List<int> left, List<int> right}) parseLocationsLists() {
@@ -21,7 +21,10 @@ void main() {
   );
 }
 
-int calculateListsSimilarityScore(List<int> left, List<int> right) {
+int calculateListsSimilarityScore({
+  required List<int> left,
+  required List<int> right,
+}) {
   final Map<int, int> rightFrequency = right
       .groupListsBy((number) => number)
       .map((key, value) => MapEntry(key, value.length));
