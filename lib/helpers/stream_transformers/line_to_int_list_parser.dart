@@ -1,6 +1,8 @@
 import 'dart:async';
 
-class LineToIntListTransformer implements StreamTransformer<String, List<int>> {
+class LineToIntListParser implements StreamTransformer<String, List<int>> {
+  const LineToIntListParser();
+
   @override
   Stream<List<int>> bind(Stream<String> stream) {
     return stream.map((line) => line.split(' ').map(int.parse).toList());

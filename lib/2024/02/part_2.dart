@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:advent_of_code/helpers/stream_transformers/line_to_int_list_transformer.dart';
+import 'package:advent_of_code/helpers/stream_transformers/line_to_int_list_parser.dart';
 
 void main() async {
   print(await countSafeReports('lib/2024/02/input.txt'));
@@ -11,7 +11,7 @@ Future<int> countSafeReports(String path) async {
       .openRead()
       .transform(utf8.decoder)
       .transform(const LineSplitter())
-      .transform(LineToIntListTransformer())
+      .transform(const LineToIntListParser())
       .map((report) => isReportSafe(report, true))
       .where((isSafe) => isSafe)
       .length;
