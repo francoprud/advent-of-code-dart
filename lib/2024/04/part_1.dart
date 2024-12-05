@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-void main() {
-  print(_countOccurrences('lib/2024/04/input.txt', 'XMAS'));
-}
+void main() => print(_countOccurrences('lib/2024/04/input.txt', 'XMAS'));
 
 int _countOccurrences(String path, String word) {
   List<List<String>> puzzle = _getPuzzle(path);
